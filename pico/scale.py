@@ -3,9 +3,12 @@
 # Author      : DOMINGUES PEDROSA Samuel
 # Date        : 2023.01.08, V1.0
 from machine import Pin
+from time import sleep
 from hx711 import HX711 # from https://github.com/SergeyPiskunov/micropython-hx711
 from pimoroni import Button
 from picographics import PicoGraphics, DISPLAY_PICO_EXPLORER, PEN_RGB565, PEN_1BIT
+
+import mqttcon
 
 PIN_DT = 4
 PIN_SCK = 5
@@ -23,19 +26,25 @@ WHITE = screen.create_pen(255, 255, 255)
 button = Button(PIN_BUTTON)
 tare = scale.read(True)
 
+mqtt = mqttcon.MQTTCon()
+
 while True:
     # Tare when the button is pressed
     if button.read():
         tare = scale.read(True)
         
-    #Clear the screen
+    # Clear the screen
     screen.set_pen(BLACK)
     screen.clear()
     
     value = round((scale.read(True) - tare) * GRAMS_MULT, 2)
+    
+    # Send value to broker
+    mqtt.send_msg(str(value), 'scale')
     
     # Show the scale's value
     screen.set_pen(WHITE)
     screen.text(f'{value} [g]', 10, 10, scale=2)
     
     screen.update()
+    sleep(10)

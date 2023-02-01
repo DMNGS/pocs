@@ -31,10 +31,17 @@ M.Bonvin voit avec moi comment la librairie fonctionne, comment les différentes
 
 Après avoir enlevé le ficheir boot.py, le script fonctionne et changer le channer pour CHANNEL_A_64 et demander la valeur brute à la fonnction read() semble enlever les nombres négatifs.
 
-# 2023.01.18
+## 2023.01.18
 J'ai ajouter la définition de la tare au lancement et la conversion en grames dans l'affichage.
 
-# 2023.01.19
+## 2023.01.19
 J'ai corrigé le code pour calculer la valeur pour que l'arrondi se faire au bon endroit et ajouter un boutton pour rafaire la tare.
 
 Je crée un petit site pour pouvoir tester l'envoie d'information avec des requêtes HTML.
+
+## 2023.02.01
+J'installe Mosquitto MQTT sur un Raspberry Pi mais qunad il s'agit de connect le Pico à celui-ci, je ne sait pas pourquoi, ça bloque. J'ai essaayer l'IP de l?Ethernet, du WiFi et son nom de domaine local mais ça bloque à l'étape de connexion au broker.
+
+J'ai débranché rebranché le Pico est tout est réglé.
+
+J'ai ajouté un module pour gérer les intérations avec le broker. Le problème est que le code est syncrone, ce qui fait que l'écran se recharge en même temps que l'envoi. Il faut que je rende le code asyncrone.
