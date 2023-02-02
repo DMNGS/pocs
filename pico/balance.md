@@ -39,9 +39,19 @@ J'ai corrigé le code pour calculer la valeur pour que l'arrondi se faire au bon
 
 Je crée un petit site pour pouvoir tester l'envoie d'information avec des requêtes HTML.
 
+## 2023.01.26
+J'essaie de me transmettre des informations entre le pico est une page php en local, mais les deux ne sont pas sur le même réseau, et les clés WiFi dans la salle ne sont pas reconnues par Ubuntu (merci les drivers propriétaires)
+
+J'ai suivi des instructions sur comment installer des drivers pour la clé, et je peux enfi l'utiliser.
+
+J'ai demander de l'aide à M. Bonvin sur comment envoyer les données du pico au serveur, et il m'a remis sur la bonne piste et au lieu d'utiliser une page PHP, je fait directent du MQTT. Il m'a guidé sur l'installation de Mosquitto et m'a donné un lien vers [un tutoriel sur la configuration et comment comminquer avec un Pico.](https://peppe8o.com/mqtt-and-raspberry-pi-pico-w-start-with-mosquitto-micropython/)
+
+Je regarde les script qui y sont fournis pour les comprendre.
+
 ## 2023.02.01
 J'installe Mosquitto MQTT sur un Raspberry Pi mais qunad il s'agit de connect le Pico à celui-ci, je ne sait pas pourquoi, ça bloque. J'ai essaayer l'IP de l?Ethernet, du WiFi et son nom de domaine local mais ça bloque à l'étape de connexion au broker.
 
 J'ai débranché rebranché le Pico est tout est réglé.
 
 J'ai ajouté un module pour gérer les intérations avec le broker. Le problème est que le code est syncrone, ce qui fait que l'écran se recharge en même temps que l'envoi. Il faut que je rende le code asyncrone.
+Je crée un petit site connécté à une basse do données pour pouvoir tester l'envoie d'information avec des requêtes HTML.
