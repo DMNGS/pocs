@@ -55,3 +55,12 @@ J'ai débranché rebranché le Pico est tout est réglé.
 
 J'ai ajouté un module pour gérer les intérations avec le broker. Le problème est que le code est syncrone, ce qui fait que l'écran se recharge en même temps que l'envoi. Il faut que je rende le code asyncrone.
 Je crée un petit site connécté à une basse do données pour pouvoir tester l'envoie d'information avec des requêtes HTML.
+
+## 2023.02.02
+Hier, quand je rangeais le matériel, le fil du A+ s'est détaché du header, et le connecter directement à une breadboard ne marche pas. Et le fil rouge aussi ce matin...
+
+J'ai dit à M. Bonvin que je dois resouder les fils, et il m'a guidé sur comment bien souder, utiliser des gaines, étaner les fils en chauffant le fils puis en le passant dans l'étain, etc... Il m'as aussi dit de soit trouver des câbles de bonnes couleurs, soit de faire une commande au près de M. Garcia.
+
+Après avoir cherché la classe, je doit passer une commande.
+
+J'ai passé commande auprès de M. Garcia et je regarde comme fonctionne `asyncio`
