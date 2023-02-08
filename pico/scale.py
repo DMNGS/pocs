@@ -14,7 +14,8 @@ PIN_DT = 4
 PIN_SCK = 5
 PIN_BUTTON = 15 # Y
 
-GRAMS_MULT = 0.035274 # Multiplier to convert the scale's raw value into grams
+UNIT_MULT = 0.035274 # Multiplier to convert the scale's raw value into grams
+UNIT = 'g'
 
 scale = HX711(PIN_DT, PIN_SCK, HX711.CHANNEL_A_64) # Initialise scale
 
@@ -27,6 +28,7 @@ button = Button(PIN_BUTTON)
 tare = scale.read(True)
 
 mqtt = mqttcon.MQTTCon()
+mqtt.send_msg('g', 'scale/unit')
 
 while True:
     # Tare when the button is pressed
@@ -37,14 +39,14 @@ while True:
     screen.set_pen(BLACK)
     screen.clear()
     
-    value = round((scale.read(True) - tare) * GRAMS_MULT, 2)
+    value = round((scale.read(True) - tare) * UNIT_MULT, 2)
     
     # Send value to broker
-    mqtt.send_msg(str(value), 'scale')
+    mqtt.send_msg(str(value), 'scale/value')
     
     # Show the scale's value
     screen.set_pen(WHITE)
-    screen.text(f'{value} [g]', 10, 10, scale=2)
+    screen.text(f'{value} [{UNIT}]', 10, 10, scale=2)
     
     screen.update()
-    sleep(10)
+    sleep(5)
