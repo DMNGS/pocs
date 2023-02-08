@@ -64,3 +64,10 @@ J'ai dit à M. Bonvin que je dois resouder les fils, et il m'a guidé sur commen
 Après avoir cherché la classe, je doit passer une commande.
 
 J'ai passé commande auprès de M. Garcia et je regarde comme fonctionne `asyncio`
+
+## 2023.08.08
+Je tente d'installer InfluxDB sur un Raspberry Pi mais je n'ai pas `influx` pour pouvoir intéragir avec.
+
+J'ai du réinstaller le serveur pour pouvoir correctement installer InfluxDB.
+
+J'ai réinstallé InfluxDB avec un [tutoriel plus récent](https://docs.influxdata.com/influxdb/v2.6/install/?t=Linux) mais ça me dit que les ports sont déjà utilisés.
