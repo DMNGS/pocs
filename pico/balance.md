@@ -65,9 +65,23 @@ Après avoir cherché la classe, je doit passer une commande.
 
 J'ai passé commande auprès de M. Garcia et je regarde comme fonctionne `asyncio`
 
-## 2023.08.08
+## 2023.02.08
 Je tente d'installer InfluxDB sur un Raspberry Pi mais je n'ai pas `influx` pour pouvoir intéragir avec.
 
 J'ai du réinstaller le serveur pour pouvoir correctement installer InfluxDB.
 
 J'ai réinstallé InfluxDB avec un [tutoriel plus récent](https://docs.influxdata.com/influxdb/v2.6/install/?t=Linux) mais ça me dit que les ports sont déjà utilisés.
+
+
+## 2023.02.09
+Je suis [un autre tuto](https://randomnerdtutorials.com/install-influxdb-2-raspberry-pi/).
+
+J'ai resussi à créer un utilisateur et un bucket, l'équivalent d'une table.
+
+Je regarde dans la doc comment l'[utiliser avec Python](https://docs.influxdata.com/influxdb/v2.6/api-guide/client-libraries/python/#) mais le nom du module est incorrect.
+
+La doc était incorreecte, j'ai trouvé une [documentation correct](https://www.influxdata.com/blog/getting-started-python-influxdb/), j'arrive à me connecter, mais pas à aller répupérer la liste des bases de données.
+
+M.Bonvin m'a ramené le livre MQTT et j'y vois que la version du livre n'est pas la plus récente (1.8 contre 2.6).
+
+Il me donne aussi deux Pico, un avec un capteur de température & d'humidité, et l'autre avec un capteur de mouvement, avec le programme connecté à un broker.
