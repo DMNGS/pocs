@@ -85,3 +85,6 @@ La doc était incorreecte, j'ai trouvé une [documentation correct](https://www.
 M.Bonvin m'a ramené le livre MQTT et j'y vois que la version du livre n'est pas la plus récente (1.8 contre 2.6).
 
 Il me donne aussi deux Pico, un avec un capteur de température & d'humidité, et l'autre avec un capteur de mouvement, avec le programme connecté à un broker.
+
+# 2023.02.14
+J'ai suivi [la documentation de la version du livre](https://docs.influxdata.com/influxdb/v1.8/introduction/install/).
