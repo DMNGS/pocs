@@ -88,3 +88,12 @@ Il me donne aussi deux Pico, un avec un capteur de température & d'humidité, e
 
 # 2023.02.14
 J'ai suivi [la documentation de la version du livre](https://docs.influxdata.com/influxdb/v1.8/introduction/install/).
+
+# 2023.02.15
+Je peux pas me connecter au broker, que se soit mon code ou celuis des Picos que M.Bonvin m'a donné. Le broker est installé, le nom du serveur et les identifiants sont corrects, et ça ne se connecte pas.
+
+Le syntaxe d'insertion du livre semble fausse, quand je recopie les lignes d'exemple, on me donne une erreur 'missing fields'.
+
+Problème de lecture, à la plce de l'espace qui sépare la table et les tags des champs, il y a un retour à la ligne...
+
+Un fait intéréssant avec les tables est qu'elles sont crées à la volée.
