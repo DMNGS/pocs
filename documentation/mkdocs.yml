@@ -1,1 +1,23 @@
-site_name: My Docs
+site_name: PiBuffet PoCs
+site_author: DOMINGUES PEDROSA Samuel
+copyright: CFPT 2023
+
+theme:
+    name: material
+    palette:
+        primary: blue
+        scheme: slate
+
+markdown_extensions:
+    - pymdownx.highlight:
+        anchor_linenums: true
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.superfences
+
+plugins:
+    - with-pdf:
+        cover_subtitle: Proof of Concepts pour le projet PiBuffet
+        toc_level: 2
+        two_columns_level: 3
+        output_path: ../documentation.pdf
