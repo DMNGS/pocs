@@ -8,6 +8,8 @@ from hx711 import HX711 # from https://github.com/SergeyPiskunov/micropython-hx7
 from pimoroni import Button
 from picographics import PicoGraphics, DISPLAY_PICO_EXPLORER, PEN_RGB565, PEN_1BIT
 
+import mqttcon
+
 PIN_DT = 4
 PIN_SCK = 5
 PIN_BUTTON = 15 # Y
@@ -25,6 +27,9 @@ WHITE = screen.create_pen(255, 255, 255)
 button = Button(PIN_BUTTON)
 tare = scale.read(True)
 
+mqtt = mqttcon.MQTTCon()
+mqtt.send_msg('g', 'scale/unit')
+
 while True:
     # Tare when the button is pressed
     if button.read():
@@ -36,8 +41,12 @@ while True:
     
     value = round((scale.read(True) - tare) * UNIT_MULT, 2)
     
+    # Send value to broker
+    mqtt.send_msg(str(value), 'scale/value')
+    
     # Show the scale's value
     screen.set_pen(WHITE)
     screen.text(f'{value} [{UNIT}]', 10, 10, scale=2)
     
     screen.update()
+    sleep(5)
