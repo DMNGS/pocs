@@ -100,3 +100,13 @@ Un fait intéréssant avec les tables est qu'elles sont crées à la volée.
 Dans mon script de configuration de serveur, j'ai oublié d'ajouter `listener 1883` au fichier de configuration.
 
 Je dois réinstaller InfluxDb, et cette fois-ci, la version la plus récente car je ne paux pas installer le version de Telegraf que je veux.
+
+## 2023.02.24
+J'ai suivi le tutoriel de la documentsion **à la lettre**, ce que ne faisait pas avant car je séléctionnait les instructions Ubuntu/Debian alors que j'aurais du télécharger les binaires et ensuite les installer avec dpkg, mais maintenant j'ai InfluxDB et le client à la version la plus récente, 2.6.
+
+## 2023.02.26
+J'ai installé Telegraf 1.16.3 et j'ai aucun problèmes. Le seul point blocant pourrait être InfluxDB 2.6 qui aurais la v1 de l'aout des données désactivée voir enlevée.
+
+Il faut que j'installe une version pré 2.0 pour utiliser l'input v1.
+
+J'ai réussi. J'ai dû utiliser les version d'InfluxDB et de Telegraf du livre mais j'ai réussi à alimenter une base de données depuis un broker MQTT.
