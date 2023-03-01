@@ -3,6 +3,10 @@
 # Author      : DOMINGUES PEDROSA Samuel
 # Date        : 2023.02.16, V1.0
 from influxdb import InfluxDBClient
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 class DbChef:
     """
@@ -29,7 +33,7 @@ class DbChef:
         self.client = InfluxDBClient(host, port, user, password, database)
     pass
 
-    def select(table):
+    def select(self):
         """
         Get all values from table
 
@@ -42,7 +46,12 @@ class DbChef:
         ResultSet
             the result of the query
         """
-        data = self.client.query(f'SELECT * FROM {table}')
+        data = self.client.query(f'SELECT time,value FROM mqtt_consumer')
         return data
 
-client = InfluxDBClient('testbench.local', 8086, 'graphana', 'lmp2020', 'home')
+chef = DbChef()
+
+scale = chef.select()
+for val in scale.raw['series'][0]['values']:
+    print(val)
+print('done')
