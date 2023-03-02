@@ -33,7 +33,7 @@ class DbChef:
         self.client = InfluxDBClient(host, port, user, password, database)
     pass
 
-    def select(self):
+    def select(self, topic):
         """
         Get all values from table
 
@@ -51,7 +51,6 @@ class DbChef:
 
 chef = DbChef()
 
-scale = chef.select()
+scale = chef.select('scale/value')
 for val in scale.raw['series'][0]['values']:
     print(val)
-print('done')
