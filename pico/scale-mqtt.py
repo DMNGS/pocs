@@ -1,7 +1,7 @@
-# Script      : scale.py
-# Description : Scale using a 5[kg] load cell and a HX711 Amplifier
+# Script      : scale-mqtt.py
+# Description : Scale using a 5[kg] load cell and a HX711 Amplifier and send its value to a MQTT broker
 # Author      : DOMINGUES PEDROSA Samuel
-# Date        : 2023.01.08, V1.0
+# Date        : 2023.01.26, V1.0
 from machine import Pin
 from time import sleep
 from hx711 import HX711 # from https://github.com/SergeyPiskunov/micropython-hx711
@@ -27,6 +27,7 @@ WHITE = screen.create_pen(255, 255, 255)
 button = Button(PIN_BUTTON)
 tare = scale.read(True)
 
+# Init the MQTT connector and send the units used
 mqtt = mqttcon.MQTTCon()
 mqtt.send_msg('g', 'scale/unit')
 

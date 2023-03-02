@@ -1,23 +1,44 @@
-import netman
+import network
 import time
-from umqttsimple import MQTTClient
+import machine
+from umqttsimple import MQTTClient # From https://github.com/RuiSantosdotme/ESP-MicroPython/blob/master/code/MQTT/umqttsimple.py
 
 # WiFi config
-COUNTRY = '#ID#'
-SSID = '#SSID#'
-PASSWORD = '#PASSWORD#'
+SSID = '#SSID'
+PASSWORD = '#PASSWORD'
 
 # MQTT config
-BROKER = '#BROKER#'
-ID_CLIENT = '#ID_CLIENT#'
-A_USER = '#USER#'
-A_PASSWORD = '#USER_PASS#'
+BROKER = '#BROKER'
+ID_CLIENT = 'PicoW'
+A_USER = '#USER'
+A_PASSWORD = '#PASSWORD'
 
+def connectWiFi():
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    wlan.connect(SSID, PASSWORD)
+    # Wait for connect or fail
+    max_wait = 10
+    while max_wait > 0:
+        if wlan.status() < network.STAT_IDLE or wlan.network.STAT_GOT_IP:
+            break
+        max_wait -= 1
+        print('waiting for connection...')
+        time.sleep(1)
+
+    # Handle connection error
+    if wlan.status() != network.STAT_GOT_IP:
+        raise RuntimeError('network connection failed')
+    else:
+        print('connected')
+        status = wlan.ifconfig()
+        print( 'ip = ' + status[0] )
+    return status
 
 class MQTTCon():
     def __init__(self):
         # Connect to WiFi
-        self.wifi_connection = netman.connectWiFi(SSID,PASSWORD,COUNTRY)
+        self.wifi_connection = connectWiFi()
         
         self.mqtt_connect()
         
@@ -44,4 +65,5 @@ class MQTTCon():
     def reconnect(self):
         print('Failed to connected to MQTT Broker. Reconnecting...')
         time.sleep(5)
-        self.mqtt_connect()
+        machine.reset()
+
