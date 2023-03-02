@@ -110,3 +110,11 @@ J'ai installé Telegraf 1.16.3 et j'ai aucun problèmes. Le seul point blocant p
 Il faut que j'installe une version pré 2.0 pour utiliser l'input v1.
 
 J'ai réussi. J'ai dû utiliser les version d'InfluxDB et de Telegraf du livre mais j'ai réussi à alimenter une base de données depuis un broker MQTT.
+
+## 2023.03.01
+J'ai continuer le connecteur d'InfluxDB, j'ai une fonction pour récupérer toutes les valeurs des mesures MQTT.
+
+## 2023.03.02
+Comme d'habitude, ça marche chez moi mais pas à l'école. Je continue la doc.
+
+Et comme d'habitude, faute de frappe.

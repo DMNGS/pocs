@@ -21,3 +21,4 @@ plugins:
         toc_level: 2
         two_columns_level: 3
         output_path: ../documentation.pdf
+        enabled_if_env: ENABLE_PDF_EXPORT

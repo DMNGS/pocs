@@ -1,4 +1,4 @@
-# PoC 1 : Récupérer les données d'un module et l'afficher sur un écran
+# PoC 1: Récupérer les données d'un module et l'afficher sur un écran
 
 L'objectif est de connecter une balance à un [Raspberry Pi Pico](./glossaire.md#rapsberry-pi-pico) connectée sur un [Pico Explorer](./glossaire.md#pico-explorer) et d'en afficher la valeur convertie en grammes sur l'écran de l'Eplorer.
 
@@ -16,14 +16,33 @@ La balance utilisée (HX711) est composée de deux parties, la cellule (la parti
 La cellule est connectée à l'amplificateur de cette manière:
 ![Couleurs des fils de la cellule](./img/cell-colors.jpg)
 
-Tandit que le pour relier l'amp au Pico, il faut relier le VCC au 3.3V, GND ensemble et DT et SCK dans des PIN qui peuvent servir d'input. Le circuit final resemble à ça:
+Le circuit final se compose ainsi:
+
+| PIN HX711 | Description      | Fil cellule |
+| --------- | ---------------- | ----------- |
+| E+        | Courant          | Rouge       |
+| E-        | Terre            | Noir        |
+| E-        | Entrée (négatif) | Blanc       |
+| E+        | Entrée (Positif) | Vert        |
+
+| PIN HX711 | Description      | PIN Pico |
+| --------- | ---------------- | -------- |
+| GND       | Terre            | GND      |
+| DT        | Sortie digitale  | 4        |
+| SCK       | Horloge          | 5        |
+| VCC       | Courant 5V/3.3V  | 3V3      |
+
+![schéma des PIN](./img/hx711-pinout.jpg)
+
 ![Le circuit](./img/circuit.jpg)
+
+[Pour plus d'information sur la puce](https://www.ourpcb.com/hx711-datasheet.html).
 
 
 ## Récupérer la valeur du microcontrôleur
 Maintenant que la balance est connéctée, il faut récupérer ce qu'elle reçoit. Il y a deux manières, créer le code pour gérer l'amplificateur à la main ou aller chercher une librairie déjà faite. J'ai choisi la deuxième option car tout les tutoriel, quel que soit la carte, dit de procéder ainsi, et je leur donne raison car il s'agit un simple PoC, donc c'est inutile de passer trop de temps dessus.
 
-D'abord, il faut crée une instance de la classe HX711 avec les PINs du DT, du SCK et le cannaux à utiliser.
+D'abord, il faut créer une instance de la classe HX711 avec les PINs du DT, du SCK et le cannaux à utiliser.
 ```python
 from hx711 import HX711 # from https://github.com/SergeyPiskunov/micropython-hx711
 scale = HX711(PIN_DT, PIN_SCK, HX711.CHANNEL_A_64)
