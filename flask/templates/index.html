@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="utf-8">
+        <title>MQTT InfluxDB</title>
+        <link rel="stylesheet" href="{{css}}">
+    </head>
+
+    <body>
+        <main>
+            {% for topic, value in objects.items() %}
+            <section>
+                <h4>{{ topic }}</h4>
+                {{ value[0]['value'] }}
+                <p class="update">Last updated: {{ value[0]['time'] }}</p>
+            </section>
+            {% endfor %}
+        </main>
+    </body>
+</html>

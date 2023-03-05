@@ -8,7 +8,7 @@ import os
 
 load_dotenv()
 
-class DbChef:
+class DbCon:
     """
     A MariaDB databse connector
 
@@ -33,24 +33,40 @@ class DbChef:
         self.client = InfluxDBClient(host, port, user, password, database)
     pass
 
-    def select(self, topic):
+    def select_all(self):
         """
-        Get all values from table
+        Get all values from the measurement
 
-        Parameters
-        ----------
-        table: str
-            the table
         Returns
         -------
         ResultSet
             the result of the query
         """
-        data = self.client.query(f'SELECT time,value FROM mqtt_consumer')
+        data = self.client.query(f'SELECT time,topic,value FROM mqtt_consumer')
         return data
 
-chef = DbChef()
+    def select_topic(self, topic):
+        """
+        Get values from table
 
-scale = chef.select('scale/value')
-for val in scale.raw['series'][0]['values']:
-    print(val)
+        Parameters
+        ----------
+        topic: str
+            the topic
+        Returns
+        -------
+        ResultSet
+            the result of the query
+        """
+        data = self.client.query(f'SELECT time,topic,value FROM mqtt_consumer WHERE topic={topic}')
+        return data
+
+    def get_topics(self):
+        values = dict()
+        serie = self.select_all()
+        for val in serie.raw['series'][0]['values']:
+            if not val[1] in values:
+                values[val[1]] = []
+            values[val[1]].append({'time': val[0], 'value': val[2]})
+
+        return values
