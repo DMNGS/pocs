@@ -2,6 +2,33 @@
 
 Le but de ce PoC est de prendre le code fait pour [le premier](./poc1.md) et d'y ajouté la connectivité vers un broker MQTT
 
+## Installer un broker MQTT sur le serveur
+Le [broker](./glossaire.md#broker) est un logiciel qui transmet des messages entre clients. Le broker utilisé est [Mosquitto](https://mosquitto.org/). Il est dispnible sur le dépot officiel de Raspberry Pi OS, avec le serveur et le client séparé.
+
+```bash title="Installation"
+sudo apt update
+sudo apt install mosquitto mosquitto-clients
+```
+
+Une fois installé, on crée un utilisateur que les clients devront utiliser.
+
+```bash title="Créer un ficher de mot de passe avec un utilisateur"
+sudo mosquitto_passwd -c -b /etc/mosquitto/passwd pocs
+# Entrer le mot de passe et le confirmer
+```
+
+Il faut ensuite désactiver les connexions annonymes, utiliser le fichier crée et le faire écouter sur un port (par défaut 1883)
+
+```conf title="/etc/mosquitto/mosqitto.conf"
+allow_anonymous false
+password_file /etc/mosquitto/passwd
+listener 1883
+```
+
+```bash title="Redémarrer le broker pour appliquer les changements"
+sudo systemctl restart mosquitto
+```
+
 ## Se connecter au réseau
 Avant de pourvoir se connecter au broker, il faut se connecter au même réseau que lui. Pour ça il faut utiliser la librairie `network`. On crée une instance de network.WLAN en mode station/client(STA_IF) puis on appèle la fonction `connect()` pour se connecter. On peut s'arrêter là, mais il est bon de vérifier que la connexion à réussi. La méthode la plus commune (et celle donnée par la documentation) est de vérifier un nombre de fois le status de la connection et de s'arrèter soit quand le nombre d'essais est dépassé ou quand le status indique qu'il n'est ni en attente ni en connexion. Puis, de vérifier que le status indique que la connexion a réussi.
 

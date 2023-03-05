@@ -118,3 +118,9 @@ J'ai continuer le connecteur d'InfluxDB, j'ai une fonction pour récupérer tout
 Comme d'habitude, ça marche chez moi mais pas à l'école. Je continue la doc.
 
 Et comme d'habitude, faute de frappe.
+
+## 2023.03.04
+Je continue le site Flask.
+
+## 2023.03.5
+Je continue le site Flask et la documentation.
